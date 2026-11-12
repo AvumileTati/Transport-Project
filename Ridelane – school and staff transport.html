@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ridelane – school and staff transport</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap">
+<style>
+:root{--bg:#f3f7f4;--card:#fff;--ink:#10261d;--mut:#586d63;--line:#dce7e0;--g:#16c26a;--gt:#0a7a40;--gs:#e1f6ea;--on:#04210f;--wb:#fdf0d2;--wt:#8a5a00;--bb:#fde6e3;--bt:#b3261e;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0c1511;--card:#15211b;--ink:#e7f1eb;--mut:#92a89c;--line:#25352c;--g:#2bd37b;--gt:#59e39a;--gs:#14301f;--wb:#3a2d0c;--wt:#f1c25a;--bb:#3b1814;--bt:#ff9b92;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0c1511;--card:#15211b;--ink:#e7f1eb;--mut:#92a89c;--line:#25352c;--g:#2bd37b;--gt:#59e39a;--gs:#14301f;--wb:#3a2d0c;--wt:#f1c25a;--bb:#3b1814;--bt:#ff9b92;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;font:16px/1.5 "Plus Jakarta Sans",system-ui,sans-serif;background:var(--bg);color:var(--ink)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:11;background:var(--bg);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:10px 16px}
+.logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:22px;letter-spacing:-.02em}
+.logo i{width:28px;height:28px;border-radius:9px;background:var(--g);color:var(--on);display:grid;place-items:center;font-style:normal;font-size:16px}
+.tabs{display:flex;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:3px}
+.tabs button{border:0;background:none;color:var(--mut);font:inherit;font-weight:600;padding:7px 14px;border-radius:999px;cursor:pointer}
+.tabs button[aria-pressed=true]{background:var(--g);color:var(--on)}
+.lang-switcher,.toolbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.lang-btn,.theme-toggle{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:6px 10px;font:inherit;font-weight:700;cursor:pointer}
+.lang-btn[aria-pressed=true]{background:var(--g);color:var(--on);border-color:var(--g)}
+.theme-toggle{min-width:42px}
+main{max-width:720px;margin:0 auto;padding:16px 16px 24px}
+h1{margin:4px 0 8px;font-size:30px;line-height:1.1;letter-spacing:-.03em;font-weight:800}
+h2{margin:26px 0 10px;font-size:18px;font-weight:800}
+.hero{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px;display:grid;gap:12px}
+.hero h1{margin:0}.hero p{margin:0;color:var(--mut)}
+.chips{display:flex;gap:8px}
+.chips button{font:inherit;font-weight:600;padding:8px 16px;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.chips button[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+label{display:grid;gap:4px;font-weight:600;font-size:14px}
+input,select{font:inherit;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--bg);color:var(--ink);min-width:0}
+:is(input,select,button):focus-visible{outline:3px solid var(--g);outline-offset:2px}
+.btn{background:var(--g);color:var(--on);border:0;border-radius:12px;padding:11px 16px;font:inherit;font-weight:800;cursor:pointer}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn.ghost{background:var(--gs);color:var(--gt)}.btn.bad{background:var(--bb);color:var(--bt)}
+.payment-option{display:flex;align-items:center;gap:12px;padding:14px;border:1px solid var(--line);border-radius:12px;background:var(--bg);cursor:pointer}
+.payment-option input{width:22px;height:22px;margin:0;padding:0;accent-color:var(--gt);flex:0 0 auto}
+.payment-option span{display:grid;gap:2px}.payment-option small,.demo-note{color:var(--mut)}
+.list,.stats{display:grid;gap:10px}.stats{grid-template-columns:repeat(2,1fr)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:grid;gap:6px}
+.big{display:block;font-size:28px;font-weight:800;line-height:1.1}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.sb{justify-content:space-between}
+small{color:var(--mut)}
+.tag{font-size:13px;font-weight:600;padding:3px 10px;border-radius:999px;background:var(--gs);color:var(--gt)}
+.tag.w{background:var(--wb);color:var(--wt)}.tag.b{background:var(--bb);color:var(--bt)}
+.empty{color:var(--mut);padding:18px;border:1px dashed var(--line);border-radius:16px;text-align:center}
+.fg{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.section{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px;margin-top:16px;display:grid;gap:16px}
+.section h2{margin:0}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.metric-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.metric{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:12px;display:grid;gap:4px}
+.metric b{font-size:26px;letter-spacing:-.03em}
+.icon-box{width:42px;height:42px;border-radius:12px;background:var(--gs);color:var(--gt);display:grid;place-items:center;font-weight:800}
+.feature-list{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.feature{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:grid;gap:8px}
+.feature strong{font-size:16px}
+.testimonials{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.quote{background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:16px;display:grid;gap:12px}
+.quote .stars{color:#f4b942;letter-spacing:2px}
+.faq-list{display:grid;gap:10px}
+.faq-list details{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.faq-list summary{cursor:pointer;font-weight:700}
+.faq-list p{margin:10px 0 0;color:var(--mut)}
+.map-card{margin-top:8px;background:var(--bg);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.map-card .map-wrap{height:220px;width:100%}
+.map-card .map-note{padding:10px 12px;color:var(--mut);font-size:13px;border-top:1px solid var(--line)}
+@media(max-width:720px){.grid-3,.grid-2,.metric-row,.feature-list,.testimonials{grid-template-columns:1fr}.fg{grid-template-columns:1fr}}
+dialog{border:1px solid var(--line);border-radius:20px;background:var(--card);color:var(--ink);padding:20px;width:min(420px,92vw)}
+dialog::backdrop{background:#0008}
+#mode{text-align:center;color:var(--mut);font-size:13px;margin:0 0 24px}
+#toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(16px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-weight:600;opacity:0;pointer-events:none;transition:opacity .2s;max-width:90vw;z-index:20}
+#toast.on{opacity:1}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body>
+<header><div class="logo"><i>R</i>Ridelane</div>
+<div class="toolbar">
+  <div class="lang-switcher" aria-label="Language selector">
+    <button class="lang-btn" data-lang="en" aria-pressed="true">EN</button>
+    <button class="lang-btn" data-lang="af" aria-pressed="false">AF</button>
+    <button class="lang-btn" data-lang="zu" aria-pressed="false">ZU</button>
+    <button class="lang-btn" data-lang="xh" aria-pressed="false">XH</button>
+  </div>
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">☀️</button>
+</div>
+<nav class="tabs" aria-label="Choose your role"><button data-role="passenger">Passenger</button><button data-role="driver">Driver</button><button data-role="admin">Admin</button></nav></header>
+<main id="app"></main><p id="mode"></p>
+<dialog id="dlg"><form id="bf"><h2 id="dt" style="margin-top:0"></h2><div class="list">
+<label>Your name<input name="name" required></label><label>Phone<input name="phone" type="tel" required></label>
+<label>Seats needed<input name="seats" type="number" min="1" value="1" required></label>
+<label>Travel date<input name="date" type="date" required></label><label>Pickup time<input name="pickupTime" type="time" required></label>
+<label>Pickup address<input id="pickupInput" name="pickup" required></label>
+<div class="map-card"><div id="miniMap" class="map-wrap"></div><div class="map-note">Directions update as you enter the pickup and destination.</div></div>
+<div class="row"><button class="btn">Send request</button><button type="button" class="btn ghost" data-act="x">Cancel</button></div></div></form></dialog>
+<dialog id="payDlg"><form id="payForm"><h2 style="margin-top:0">Pay for your ride</h2><p class="demo-note">Demo checkout only. No real payment will be taken.</p><div id="paySummary" class="card"></div><input id="payBookingId" type="hidden"><fieldset class="list" style="border:0;padding:0;margin:16px 0"><legend style="font-weight:800;margin-bottom:8px">Choose a payment method</legend><label class="payment-option"><input type="radio" name="method" value="card" required><span><b>Card</b><small>Demo only. No card details needed.</small></span></label><label class="payment-option"><input type="radio" name="method" value="eft" required><span><b>Instant EFT</b><small>Demo only. No bank details needed.</small></span></label></fieldset><div class="row"><button class="btn">Simulate payment</button><button type="button" class="btn ghost" data-act="payClose">Cancel</button></div></form></dialog>
+<div id="toast" role="status" aria-live="polite"></div>
+<script>
+const $=s=>document.querySelector(s),esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])),R=n=>"R"+Number(n||0).toLocaleString("en-ZA"),n=x=>Math.max(0,+x||0),K="ridelane-v1",D=$("#dlg"),PD=$("#payDlg");
+const GOOGLE_MAPS_API_KEY = "AIzaSyCHoWFdfDvvPNwEaR5l5zsU_EKJ9tcjpjg";
+const translations={
+ en:{passenger:"Passenger",driver:"Driver",admin:"Admin",checkRoutes:"Check routes",becomeDriver:"Become a driver",heroTitle:"Reliable transport for school runs and staff commutes.",howItWorks:"How it works",safeRoutes:"Safe school & staff routes",shopping:"Mon–Fri",findRoute:"Find your route",pickupArea:"Pickup area",schoolWorkplace:"School or workplace",availableNow:"Available now",yourRequests:"Your requests",requestSeats:"Request seats",full:"Full",pickupPlaceholder:"e.g. Claremont",destPlaceholder:"e.g. Sunridge Primary",travelDate:"Travel date",pickupTime:"Pickup time",cancel:"Cancel"},
+ af:{passenger:"Passasier",driver:"Bestuurder",admin:"Admin",checkRoutes:"Kontroleer roetes",becomeDriver:"Word bestuurder",heroTitle:"Betroubare vervoer vir skool- en personeelpendels.",howItWorks:"Hoe dit werk",safeRoutes:"Veilige skool- & personeelroetes",shopping:"Ma–Vr",findRoute:"Vind jou roete",pickupArea:"Optelarea",schoolWorkplace:"Skool of werkplek",availableNow:"Nou beskikbaar",yourRequests:"Jou versoeke",requestSeats:"Versoek sitplekke",full:"Vol",pickupPlaceholder:"bv. Claremont",destPlaceholder:"bv. Sunridge Primary",travelDate:"Reisdatum",pickupTime:"Ophaltyd",cancel:"Kanselleer"},
+ zu:{passenger:"Umhambi",driver:"Umshayeli",admin:"Admin",checkRoutes:"Bheka izindlela",becomeDriver:"Yiba umshayeli",heroTitle:"Ukuhamba okuthembekile kwezikole kanye nokuhamba kwabashandi.",howItWorks:"Kusebenza kanjani",safeRoutes:"Izindlela eziphephile zesikole & abasebenzi",shopping:"Ms–Ul",findRoute:"Thola indlela yakho",pickupArea:"Indawo yokukhangela",schoolWorkplace:"Isikole noma indawo yokusebenza",availableNow:"Kukhona manje",yourRequests:"Izicelo zakho",requestSeats:"Cela izihlalo",full:"Egcwele",pickupPlaceholder:"isb. Claremont",destPlaceholder:"isb. Sunridge Primary",travelDate:"Usuku loluya",pickupTime:"Isikhathi sokuthatha",cancel:"Khansela"},
+ xh:{passenger:"Umhambi",driver:"Umqhubi",admin:"Admin",checkRoutes:"Jonga iindlela",becomeDriver:"Yiba umqhubi",heroTitle:"Ukuhamba okuthembekileyo kwezikolo kunye nabasebenzi.",howItWorks:"Isebenza njani",safeRoutes:"Iindlela ezikhuselekileyo zesikole & abasebenzi",shopping:"Mv–Lw",findRoute:"Fumana indlela yakho",pickupArea:"Indawo yokufika",schoolWorkplace:"Isikolo okanye indawo yokusebenza",availableNow:"Ikuhanjwa ngoku",yourRequests:"Izicelo zakho",requestSeats:"Cela izihlalo",full:"Zigcwele",pickupPlaceholder:"isb. Claremont",destPlaceholder:"isb. Sunridge Primary",travelDate:"Umhla wokuhamba",pickupTime:"Ixesha lokuthatha",cancel:"Rhoxisa"}
+};
+const st={role:"passenger",vehicles:[],bookings:[],db:null,uid:"local",admin:true,type:"school",lang:"en",theme:"light"};
+const t=(key)=>translations[st.lang]?.[key]||translations.en[key]||key;
+const TY={school:"School run",staff:"Staff shuttle"},BL={requested:["Awaiting driver","w"],confirmed:["Confirmed",""],declined:["Declined","b"]},VL={pending:["Awaiting approval","w"],approved:["Live",""],rejected:["Rejected","b"]};
+let tt;const toast=m=>{const t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>t.classList.remove("on"),3200)};
+const fail=e=>toast(e&&e.code==="invalid_argument"?"You can view but not save. Ask the owner for Contributor access.":"Could not save. Try again.");
+function applyTheme(){document.documentElement.dataset.theme=st.theme;const btn=$("#themeToggle");if(btn)btn.textContent=st.theme==="dark"?"🌙":"☀️";}
+function applyLanguage(){document.querySelectorAll(".lang-btn").forEach(btn=>btn.setAttribute("aria-pressed",String(btn.dataset.lang===st.lang)));const q1=$("#q1"),q2=$("#q2");if(q1)q1.placeholder=t("pickupPlaceholder");if(q2)q2.placeholder=t("destPlaceholder");}
+let map, directionsService, directionsRenderer, pickupAutocomplete, routeAutocomplete;
+function loadGoogleMaps(){
+ if(window.google && window.google.maps){ initGoogleMap(); return; }
+ if(document.getElementById("ridelaneGoogleMaps")) return;
+ const script=document.createElement("script");
+ script.id="ridelaneGoogleMaps";
+ script.src=`https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&libraries=places&callback=initGoogleMap`;
+ script.async=true; script.defer=true;
+ document.head.appendChild(script);
+}
+window.initGoogleMap = function(){
+  if(!document.getElementById("miniMap")) return;
+  const mapEl=document.getElementById("miniMap");
+  map=new google.maps.Map(mapEl,{center:{lat:-33.9249,lng:18.4241},zoom:11,disableDefaultUI:true});
+  directionsService=new google.maps.DirectionsService();
+  directionsRenderer=new google.maps.DirectionsRenderer({map, suppressMarkers:false,polylineOptions:{strokeColor:"#16c26a",strokeWeight:4}});
+  const pickupField=document.getElementById("pickupInput");
+  if(pickupField){
+    pickupAutocomplete=new google.maps.places.Autocomplete(pickupField,{types:["address"],componentRestrictions:{country:"za"}});
+    pickupAutocomplete.addListener("place_changed",()=>updateMapRoute());
+    pickupField.addEventListener("input",()=>updateMapRoute());
+  }
+  const q1=document.getElementById("q1");
+  if(q1){
+    routeAutocomplete=new google.maps.places.Autocomplete(q1,{types:["geocode"],componentRestrictions:{country:"za"}});
+    q1.addEventListener("input",()=>updateMapRoute());
+  }
+  const q2=document.getElementById("q2");
+  if(q2){
+    if(!routeAutocomplete){ routeAutocomplete=new google.maps.places.Autocomplete(q2,{types:["geocode"],componentRestrictions:{country:"za"}}); }
+    q2.addEventListener("input",()=>updateMapRoute());
+  }
+  updateMapRoute();
+};
+function updateMapRoute(){
+  if(!map || !directionsService || !directionsRenderer) return;
+  const pickupField=document.getElementById("pickupInput");
+  const start = pickupField && pickupField.value ? pickupField.value.trim() : (document.getElementById("q1")?.value || "").trim();
+  const destinationField=document.getElementById("q2");
+  const end = destinationField && destinationField.value ? destinationField.value.trim() : "Sunridge Primary";
+  if(!start || !end){
+    directionsRenderer.setDirections({routes:[]});
+    return;
+  }
+  directionsService.route({origin:start,destination:end,travelMode:google.maps.TravelMode.DRIVING},(result,status)=>{
+     if(status === "OK") directionsRenderer.setDirections(result);
+     else directionsRenderer.setDirections({routes:[]});
+  });
+}
+function load(){try{const d=JSON.parse(localStorage.getItem(K)||"{}");st.vehicles=d.vehicles||[];st.bookings=d.bookings||[]}catch(e){}}
+function save(){try{localStorage.setItem(K,JSON.stringify({vehicles:st.vehicles,bookings:st.bookings}))}catch(e){}}
+async function add(col,o){o.ts=Date.now();o.uid=st.uid;
+ if(st.db){try{await st.db.collection(col).add(o)}catch(e){fail(e);return false}}
+ else{o.id="l"+o.ts;st[col].push(o);save();paint()}
+ return true}
+async function patch(col,id,p){
+ if(st.db){try{await st.db.doc(col+"/"+id).update(p)}catch(e){fail(e)}}
+ else{Object.assign(st[col].find(x=>x.id===id)||{},p);save();paint()}}
+async function del(col,id){
+ if(st.db){try{await st.db.doc(col+"/"+id).delete()}catch(e){fail(e)}}
+ else{st[col]=st[col].filter(x=>x.id!==id);save();paint()}}
+const left=v=>n(v.seats)-st.bookings.filter(b=>b.vid===v.id&&b.status==="confirmed").reduce((s,b)=>s+n(b.seats),0);
+const own=(a,k)=>a.filter(x=>x[k]===st.uid).sort((a,b)=>b.ts-a.ts);
+const list=(a,f,t)=>a.length?a.map(f).join(""):`<div class="empty">${t}</div>`;
+const unitPrice=b=>n(b.monthlyPrice??st.vehicles.find(v=>v.id===b.vid)?.price),paymentTotal=b=>unitPrice(b)*n(b.seats);
+const paymentBlock=b=>b.status!=="confirmed"?"":b.paymentStatus==="demo-paid"?`<div class="row sb"><span class="tag">Demo payment complete</span><small>${R(paymentTotal(b))} recorded for this month</small></div>`:`<div class="row sb"><small>${R(paymentTotal(b))} per month</small><button class="btn" data-act="pay" data-id="${esc(b.id)}">Pay monthly fee</button></div>`;
+const featureChips=(v)=>{const items=String(v.features||"").split(",").map(s=>s.trim()).filter(Boolean).slice(0,2);return items.length?`<div class="row">${items.map(f=>`<span class="tag">${esc(f)}</span>`).join("")}</div>`:"";};
+const vc=(v,x,sub)=>`<article class="card"><div class="row sb"><b>${esc(v.car)} · ${n(v.seats)} seats</b><b>${R(v.price)}<small> per seat/month</small></b></div><span>${esc(v.area)} to ${esc(v.dest)}</span>${sub?`<small>${sub}</small>`:""}${v.experience?`<small>${esc(v.experience)} years driving experience</small>`:""}${v.serviceDays?`<small>Runs: ${esc(v.serviceDays)}</small>`:""}${featureChips(v)}<div class="row"><span class="tag">${TY[v.type]||"Transport"}</span>${x}</div></article>`;
+const info=v=>`${esc(v.driver)} · ${esc(v.phone)} · ${esc(v.plate)}`;
+const bc=(b,x)=>{const l=BL[b.status]||BL.requested;return`<article class="card"><div class="row sb"><b>${esc(b.name)} · ${n(b.seats)} seat${n(b.seats)>1?"s":""}</b><span class="tag ${l[1]}">${l[0]}</span></div><span>${esc(b.vlabel)}</span><small>${esc(b.pickup)} to ${esc(b.dest)} · ${esc(b.phone)}</small>${b.date?`<small>Travel date: ${esc(b.date)} · ${esc(b.pickupTime||"Pickup time")}</small>`:""}${paymentBlock(b)}${x}</article>`};
+const acts=b=>b.status==="requested"?`<div class="row"><button class="btn" data-act="cf" data-id="${esc(b.id)}">Confirm</button><button class="btn bad" data-act="dc" data-id="${esc(b.id)}">Decline</button></div>`:"";
+const V={
+passenger:()=>`<section class="hero"><div class="row sb"><span class="tag">${t("safeRoutes")}</span><span class="tag w">${t("shopping")}</span></div>
+<h1>${t("heroTitle")}</h1>
+<p>Compare vetted drivers, view seat availability, and book a route that fits your schedule.</p>
+<div class="row"><button class="btn" data-role="passenger">${t("checkRoutes")}</button><button class="btn ghost" data-role="driver">${t("becomeDriver")}</button></div>
+<div class="metric-row"><div class="metric"><small>Verified drivers</small><b>48</b></div><div class="metric"><small>Live routes</small><b>92</b></div><div class="metric"><small>Monthly seats</small><b>1.3k</b></div><div class="metric"><small>Avg. rating</small><b>4.9★</b></div></div></section>
+<div class="section">
+  <h2>${t("howItWorks")}</h2>
+  <div class="grid-3">
+    <div class="card"><div class="icon-box">1</div><strong>Choose your route</strong><small>Search by area, school, or workplace and compare available service options.</small></div>
+    <div class="card"><div class="icon-box">2</div><strong>Select seats</strong><small>Pick your pickup point, preferred travel day, and the number of seats needed.</small></div>
+    <div class="card"><div class="icon-box">3</div><strong>Ride with confidence</strong><small>Drivers confirm the booking and you receive trip updates before the commute begins.</small></div>
+  </div>
+</div>
+<div class="section">
+  <h2>Why families and teams choose Ridelane</h2>
+  <div class="feature-list">
+    <div class="feature"><strong>Safety first</strong><small>Verified drivers, route checks, and clear contact details before every journey.</small></div>
+    <div class="feature"><strong>Flexible schedules</strong><small>School runs, staff shuttles, and recurring monthly seat plans to fit your routine.</small></div>
+    <div class="feature"><strong>Transparent pricing</strong><small>Monthly seat rates with no surprise add-ons or unclear route fees.</small></div>
+    <div class="feature"><strong>Quick confirmation</strong><small>Send a request in minutes and get approval updates from the driver or admin.</small></div>
+  </div>
+</div>
+<div class="section">
+  <h2>What riders say</h2>
+  <div class="testimonials">
+    <div class="quote"><div class="stars">★★★★★</div><p>“The booking was simple and the driver arrived early every morning. It feels dependable and safe.”</p><small>— Parent, Claremont</small></div>
+    <div class="quote"><div class="stars">★★★★★</div><p>“Our staff shuttle runs on time and the booking system is easy for everyone to use.”</p><small>— Office Manager, CBD</small></div>
+    <div class="quote"><div class="stars">★★★★★</div><p>“We like the route transparency and the fact that we can choose the safest pick-up point.”</p><small>— Parent, Gardens</small></div>
+  </div>
+</div>
+<div class="section">
+  <h2>Frequently asked questions</h2>
+  <div class="faq-list">
+    <details open><summary>Can I request a custom route?</summary><p>Yes. The driver or admin can approve a route based on your pickup area, school, or workplace.</p></details>
+    <details><summary>Is it only for school transport?</summary><p>No. The platform supports school transport, staff shuttles, and recurring commuter routes.</p></details>
+    <details><summary>How quickly will I get a response?</summary><p>Drivers typically confirm bookings within a few hours, depending on route demand and pickup schedule.</p></details>
+    <details><summary>Can I book more than one seat?</summary><p>Absolutely. You can request multiple seats and the driver will confirm available capacity.</p></details>
+  </div>
+</div>
+<section class="hero" style="margin-top:16px"><h1>${t("findRoute")}</h1>
+<div class="chips" role="group" aria-label="Transport type">${Object.entries(TY).map(([k,v])=>`<button data-type="${k}" aria-pressed="${k===st.type}">${v}</button>`).join("")}</div>
+<label>${t("pickupArea")}<input id="q1" placeholder="${t("pickupPlaceholder")}" autocomplete="off"></label>
+<label>${t("schoolWorkplace")}<input id="q2" placeholder="${t("destPlaceholder")}" autocomplete="off"></label></section>
+<h2>${t("availableNow")}</h2><div id="res" class="list"></div><h2>${t("yourRequests")}</h2><div id="mine" class="list"></div>`,
+driver:()=>`<section class="hero"><h1>Put your vehicle to work</h1><p>Add your car or minibus. Once the admin approves it, families and staff can request seats.</p>
+<form id="vf" class="fg">
+<label>Your name<input name="driver" required></label><label>Phone<input name="phone" type="tel" required></label>
+<label>Vehicle<input name="car" placeholder="Toyota Quantum" required></label><label>Number plate<input name="plate" required></label>
+<label>Passenger seats<input name="seats" type="number" min="1" max="60" required></label>
+<label>Service<select name="type"><option value="school">School run</option><option value="staff">Staff shuttle</option></select></label>
+<label>Area you pick up from<input name="area" placeholder="Claremont" required></label><label>School or workplace<input name="dest" placeholder="Sunridge Primary" required></label>
+<label>Price per seat, per month (R)<input name="price" type="number" min="0" required></label>
+<label>Years of experience<input name="experience" type="number" min="0" max="30" value="1"></label>
+<label>Service days<input name="serviceDays" placeholder="Mon-Fri" required></label>
+<label>Vehicle features<input name="features" placeholder="AC, booster seats, tracking"></label>
+<div class="row" style="align-items:end"><button class="btn">Submit for approval</button></div></form></section>
+<h2>Your vehicles</h2><div id="myv" class="list"></div><h2>Seat requests</h2><div id="myb" class="list"></div>`,
+admin:()=>st.admin?`<h1>Control room</h1><div id="stats" class="stats"></div><h2>Vehicles awaiting approval</h2><div id="qv" class="list"></div><h2>Seat requests</h2><div id="qb" class="list"></div><h2>Live vehicles</h2><div id="lv" class="list"></div>`:`<div class="empty">The admin portal is for the transport coordinator. Ask the owner of this page for Editor access.</div>`};
+function shell(){$("#app").innerHTML=V[st.role]();document.querySelectorAll("[data-role]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.role===st.role));$("#mode").textContent=st.db?"Live and shared with everyone who has access.":"Demo mode: saved in this browser only.";paint()}
+function paint(){const r=st.role,q1=($("#q1")?.value||"").toLowerCase().trim(),q2=($("#q2")?.value||"").toLowerCase().trim(),put=(id,h)=>{const e=$("#"+id);if(e)e.innerHTML=h},all=st.vehicles,ok=all.filter(v=>v.status==="approved");
+ if(r==="passenger"){
+  const m=ok.filter(v=>v.type===st.type&&(!q1||String(v.area).toLowerCase().includes(q1))&&(!q2||String(v.dest).toLowerCase().includes(q2)));
+  put("res",list(m,v=>vc(v,`<span class="tag">${left(v)} left</span><button class="btn" data-act="req" data-id="${esc(v.id)}" ${left(v)<1?"disabled":""}>${left(v)<1?t("full"):t("requestSeats")}</button>`,`Driver ${esc(String(v.driver).split(" ")[0])} · approved by admin`),"No vehicles match yet. Try a wider area, or check back as drivers join."));
+  put("mine",list(own(st.bookings,"uid"),b=>bc(b,""),"Seats you request will show up here."))}
+ if(r==="driver"){
+  put("myv",list(own(all,"uid"),v=>vc(v,`<span class="tag ${(VL[v.status]||VL.pending)[1]}">${(VL[v.status]||VL.pending)[0]}</span>`,esc(v.plate)),"Vehicles you add will show up here."));
+  put("myb",list(st.bookings.filter(b=>b.duid===st.uid).sort((a,b)=>b.ts-a.ts),b=>bc(b,acts(b)),"Requests for your vehicles will show up here."))}
+ if(r==="admin"&&st.admin){
+  const pend=all.filter(v=>v.status==="pending");
+  const monthlyValue=ok.reduce((sum,v)=>sum+n(v.price)*n(v.seats),0);
+  put("stats",[["Live vehicles",ok.length],["Awaiting approval",pend.length],["Open requests",st.bookings.filter(b=>b.status==="requested").length],["Monthly value",R(monthlyValue)]].map(([l,x])=>`<div class="card"><b class="big">${x}</b><small>${l}</small></div>`).join(""));
+  put("qv",list(pend,v=>vc(v,`<button class="btn" data-act="ok" data-id="${esc(v.id)}">Approve</button><button class="btn bad" data-act="no" data-id="${esc(v.id)}">Reject</button>`,info(v)),"Nothing waiting. New vehicles from drivers land here."));
+  put("qb",list([...st.bookings].sort((a,b)=>b.ts-a.ts),b=>bc(b,acts(b)),"No seat requests yet."));
+  put("lv",list(ok,v=>vc(v,`<span class="tag">${left(v)} seats left</span><button class="btn bad" data-act="rm" data-id="${esc(v.id)}">Remove</button>`,info(v)),"No live vehicles yet."))}}
+document.addEventListener("click",e=>{
+ const langBtn=e.target.closest(".lang-btn"); if(langBtn){ st.lang=langBtn.dataset.lang; applyLanguage(); shell(); return; }
+ const themeBtn=e.target.closest("#themeToggle"); if(themeBtn){ st.theme=st.theme==="dark"?"light":"dark"; applyTheme(); return; }
+ const r=e.target.closest("[data-role]");if(r){st.role=r.dataset.role;shell();return}
+ const t=e.target.closest("[data-type]");if(t){st.type=t.dataset.type;document.querySelectorAll("[data-type]").forEach(b=>b.setAttribute("aria-pressed",b===t));paint();return}
+ const a=e.target.closest("[data-act]");if(!a)return;const id=a.dataset.id,c=a.dataset.act;
+ if(c==="pay"){const b=st.bookings.find(x=>x.id===id);if(b&&b.status==="confirmed"&&b.paymentStatus!=="demo-paid"){$("#payBookingId").value=id;$("#paySummary").innerHTML=`<b>${esc(b.vlabel)}</b><span>${n(b.seats)} seat${n(b.seats)>1?"s":""} × ${R(unitPrice(b))} per month</span><strong>Total ${R(paymentTotal(b))} per month</strong>`;PD.showModal()}return}
+ if(c==="payClose"){PD.close();return}
+ if(c==="ok"||c==="no")patch("vehicles",id,{status:c==="ok"?"approved":"rejected"});
+ if(c==="cf"||c==="dc")patch("bookings",id,{status:c==="cf"?"confirmed":"declined"});
+ if(c==="rm")del("vehicles",id);
+ if(c==="x")D.close();
+ if(c==="req"){const v=st.vehicles.find(x=>x.id===id);if(v){D.dataset.vid=id;$("#dt").textContent=`${v.car} · ${v.area} to ${v.dest}`;$("#bf").elements.seats.max=left(v);const pickupField=document.getElementById("pickupInput");if(pickupField){pickupField.value = "";}updateMapRoute();D.showModal();}}});
+document.addEventListener("input",e=>{if(e.target.id==="q1"||e.target.id==="q2")paint(); if(e.target.id==="pickupInput"||e.target.id==="q1"||e.target.id==="q2") updateMapRoute();});
+document.addEventListener("submit",async e=>{e.preventDefault();const f=e.target,d=Object.fromEntries(new FormData(f));
+ if(f.id==="payForm"){if(st.db){toast("Demo checkout is unavailable while connected to live data.");return}const id=$("#payBookingId").value,b=st.bookings.find(x=>x.id===id);if(!b||b.status!=="confirmed"){PD.close();toast("This booking is not ready for payment.");return}await patch("bookings",id,{paymentStatus:"demo-paid",paymentMethod:d.method,demoPaidAt:Date.now()});PD.close();toast("Demo payment recorded. No money was charged.");return}
+ if(f.id==="vf"&&await add("vehicles",{...d,seats:n(d.seats),price:n(d.price),experience:n(d.experience),status:"pending"})){f.reset();toast("Submitted. The admin will review your vehicle.")}
+ if(f.id==="bf"){const v=st.vehicles.find(x=>x.id===D.dataset.vid);if(v&&await add("bookings",{...d,seats:n(d.seats),date:d.date,pickupTime:d.pickupTime,vid:v.id,duid:v.uid,vlabel:`${v.car} (${v.area})`,dest:v.dest,monthlyPrice:n(v.price),paymentStatus:"unpaid",status:"requested"})){D.close();f.reset();toast("Request sent. The driver will confirm.")}}});
+load();applyTheme();applyLanguage();shell();loadGoogleMaps();
+(async()=>{try{const c=window.claude;if(!c)return;const[db,u]=await Promise.all([c.use("db"),c.use("user")]);if(!db)return;
+ st.db=db;st.vehicles=[];st.bookings=[];if(u){st.uid=(await u.id())||"anon";st.admin=await u.canEdit()}
+ ["vehicles","bookings"].forEach(k=>db.collection(k).onSnapshot(s=>{st[k]=s.docs.map(d=>({...d.data(),id:d.id}));paint()},()=>toast("Live updates paused")));shell()}catch(e){}})();
+</script></body></html>
